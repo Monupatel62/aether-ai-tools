@@ -8,7 +8,7 @@ Tool execution is an explicit security boundary; high-impact actions require app
 
 ## Dependencies
 
-aether-ai-security, aether-ai-observability, optional aether-ai-mcp and compatible @woho/tools.
+aether-ai-security, aether-ai-observability, and the optional aether-ai-mcp adapter.
 
 ## Data and control flow
 
