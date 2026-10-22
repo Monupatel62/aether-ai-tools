@@ -8,7 +8,7 @@ Tool manifest, invocation envelope, scopes, risk classification and audit event
 
 ## Direct dependencies
 
-security, MCP, observability, optional DevKit tools.
+aether-ai-security, aether-ai-observability, and the public aether-ai-mcp adapter contract where needed.
 
 ## Required rules
 
