@@ -1,6 +1,6 @@
 # Repository specification: aether-ai-tools
 
-**Status:** Documentation baseline copied from the Aether AI master specification. Implementation status must be verified separately.
+**Status:** Repository exists; documentation-only on the inspected `main` branch. No application implementation is present in the audited tree.
 
 ## Mission
 
@@ -12,6 +12,7 @@ Tool invocation is a trust boundary; high-impact actions require policy approval
 
 ## Dependencies and connections
 
+aether-ai-security and aether-ai-observability; tool implementations are registered through a public manifest/invocation contract.
 
 ## Owned capabilities
 
