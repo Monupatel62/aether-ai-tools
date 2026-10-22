@@ -12,7 +12,6 @@ Tool invocation is a trust boundary; high-impact actions require policy approval
 
 ## Dependencies and connections
 
-Security, observability, MCP; compatible WoHo DevKit @woho/tools as an evaluated dependency.
 
 ## Owned capabilities
 
@@ -64,7 +63,6 @@ Tool manifest, scope policy, sandbox rules, output limits, redaction, approval a
 
 ## Research references
 
-- [WoHo AI DevKit](https://github.com/Monupatel62/woho-ai-devkit) — separate project; verify package APIs/version before integration.
 - [AI DIAL Core](https://github.com/epam/ai-dial-core) — model gateway reference; repository includes Apache-2.0 LICENSE.
 - [AI DIAL Chat](https://github.com/epam/ai-dial-chat) — modular UI/BFF reference; check file-level license notices before reuse.
 - [AI DIAL documentation](https://github.com/epam/ai-dial) and [MCP specification](https://modelcontextprotocol.io/) where relevant.
