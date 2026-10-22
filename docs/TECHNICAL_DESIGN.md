@@ -12,7 +12,7 @@ Each tool manifest declares stable name/version, input/output JSON schema, permi
 
 ## Connections and ownership
 
-Agents call tools through registry; MCP adapters register remote tools only after allowlist/policy checks. Compatible DevKit @woho/tools may provide primitives, but Aether must confirm scopes, isolation, and exports.
+Agents call tools through the registry; MCP adapters register remote tools only after allowlist and policy checks. Aether owns the tool execution contract and must enforce scopes, isolation, and explicit approval rules.
 
 ## Failure cases to design explicitly
 
