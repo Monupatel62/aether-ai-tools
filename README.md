@@ -12,12 +12,10 @@ Tool registry and execution boundary; dangerous actions require policy and, wher
 
 ## Dependencies
 
-aether-ai-security, aether-ai-observability, aether-ai-mcp for external tools; WoHo AI DevKit @woho/tools where compatible.
+aether-ai-security and aether-ai-observability; MCP-backed tools register through the public tool contract.
 
 ## Project rules
 
-- Keep WoHoTech separate; this repository belongs to the new Aether AI project.
-- Treat the existing [WoHo AI DevKit](https://github.com/Monupatel62/woho-ai-devkit) as a separate dependency. Do not copy or rewrite it without a reviewed technical reason.
 - No implementation starts until the documentation and cross-repository contracts are reviewed.
 - Do not commit secrets, API keys, user data, or production credentials.
 - Public interfaces, security decisions, and non-obvious implementation choices must be documented.
