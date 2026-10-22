@@ -20,15 +20,12 @@ Tool execution is an explicit security boundary; high-impact actions require app
 
 ## Out of scope
 
-- Replacing the complete WoHo AI DevKit.
 - Calling model providers directly from browser code.
 - Duplicating another repository's business logic.
 - Deploying production infrastructure during the documentation phase.
 - Treating a design proposal as an already implemented feature.
 
 ## Consumers and dependencies
-
-aether-ai-security, aether-ai-observability, optional aether-ai-mcp and compatible @woho/tools.
 
 ## Requirements
 
@@ -51,8 +48,6 @@ aether-ai-security, aether-ai-observability, optional aether-ai-mcp and compatib
 ## Non-negotiable rules
 
 - Documentation-first: no application implementation until the cross-repository contracts and this plan are reviewed.
-- Keep the platform separate from WoHoTech.
-- Treat [WoHo AI DevKit](https://github.com/Monupatel62/woho-ai-devkit) as an external dependency at its published package boundaries. Current inspected repository metadata reports version **0.8.37**, package license **Apache-2.0**, and Node.js engine **>=20**; verify the exact package/version and APIs again before implementation.
 - Never assume an external project is licensed for reuse based only on its name. Verify each repository's LICENSE, notices, dependency licenses, version, and redistribution conditions before vendoring or modifying code.
 - Do not commit API keys, tokens, production URLs with credentials, personal data, or real customer documents.
 - Public APIs, trust boundaries, non-obvious decisions, and failure/retry behavior must be documented.
