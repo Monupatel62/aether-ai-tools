@@ -30,3 +30,15 @@ For each future change, record: date; exact files; why the change is needed; alt
 - Reviewed official MCP 2026-07-28 release notes, OWASP GenAI 2026 Top 10 announcement, OpenTelemetry GenAI conventions, GitHub Actions secure-use guidance, and AI DIAL Core documentation.
 - Master audit and threat model are linked from the platform repository.
 - No application code, production config, or security implementation was added; these are design requirements, not claims of implemented controls.
+
+
+## 2026-10-23 — Tool boundary and MCP direction audit
+
+- Updated the architecture and README to define Tools as the protocol-neutral permission boundary, depending directly on Security and Observability contracts.
+- Clarified that MCP consumes the public manifest/invocation contract and is registered by a composition root, avoiding a Tools ↔ MCP package cycle.
+- Added required declaration and validation concerns for nested input/output schemas, side effects, risk, approval binding, idempotency, execution limits, redaction, reauthorization, and isolated egress.
+- Reconciled wording with the existing sandbox/egress proposal while preserving the fact that no sandbox runtime or enforcement is implemented or selected.
+- Verification: edited architecture and README were fetched back from the branch. No runtime tests are applicable to this documentation-only change.
+- Security impact: states fail-closed behavior on absent authorization, isolation, egress or bounds; prevents manifests, model output, and remote tool metadata from granting authority.
+- Open decisions: ADR-0021 tenant/role ownership, exact public schemas/limits, sandbox mechanism, approval format, and deployment topology remain unresolved.
+- Follow-up: cross-check the invocation schema and master P0 validation harness; do not begin runtime implementation before the documented Phase 0 gate and explicit approval.
