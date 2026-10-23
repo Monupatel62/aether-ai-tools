@@ -12,7 +12,7 @@ Tool registry and execution boundary; dangerous actions require policy and, wher
 
 ## Dependencies
 
-aether-ai-security and aether-ai-observability; MCP-backed tools register through the public tool contract.
+Direct dependencies: `aether-ai-security` and `aether-ai-observability`. The protocol-neutral Tools contract does not import MCP. MCP adapters consume the public manifest/invocation contract and register through a composition root after policy checks.
 
 ## Project rules
 
