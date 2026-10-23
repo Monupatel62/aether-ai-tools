@@ -1,4 +1,4 @@
-import type { ToolManifestV1 } from "./manifest.js";
+import { validateToolManifest, type ToolManifestV1 } from "./manifest.js";
 
 export interface ToolInvocationContext {
   readonly grantedScopes: readonly string[];
@@ -16,10 +16,9 @@ export type ToolInvocationDecision =
  */
 export function preflightToolInvocation(
   manifest: ToolManifestV1,
-  context: ToolInvocationContext,
-  manifestValid: boolean
+  context: ToolInvocationContext
 ): ToolInvocationDecision {
-  if (!manifestValid) return { allowed: false, reason: "manifest_invalid" };
+  if (validateToolManifest(manifest).length > 0) return { allowed: false, reason: "manifest_invalid" };
   if (context.trustedContextPresent !== true) return { allowed: false, reason: "missing_trusted_context" };
   if (manifest.permissionScopes.some(scope => !context.grantedScopes.includes(scope))) {
     return { allowed: false, reason: "missing_scope" };
