@@ -41,18 +41,19 @@ describe("tool manifest validation", () => {
 describe("fail-closed tool invocation preflight", () => {
   it("requires trusted context, required scopes, and approval", () => {
     const protectedManifest = { ...manifest, riskClass: "high", requiresApproval: true } as ToolManifestV1;
-    expect(preflightToolInvocation(protectedManifest, { grantedScopes: ["calendar.read"], approvalGranted: true, trustedContextPresent: false }, true))
+    expect(preflightToolInvocation(protectedManifest, { grantedScopes: ["calendar.read"], approvalGranted: true, trustedContextPresent: false }))
       .toEqual({ allowed: false, reason: "missing_trusted_context" });
-    expect(preflightToolInvocation(protectedManifest, { grantedScopes: [], approvalGranted: true, trustedContextPresent: true }, true))
+    expect(preflightToolInvocation(protectedManifest, { grantedScopes: [], approvalGranted: true, trustedContextPresent: true }))
       .toEqual({ allowed: false, reason: "missing_scope" });
-    expect(preflightToolInvocation(protectedManifest, { grantedScopes: ["calendar.read"], approvalGranted: false, trustedContextPresent: true }, true))
+    expect(preflightToolInvocation(protectedManifest, { grantedScopes: ["calendar.read"], approvalGranted: false, trustedContextPresent: true }))
       .toEqual({ allowed: false, reason: "approval_required" });
-    expect(preflightToolInvocation(protectedManifest, { grantedScopes: ["calendar.read"], approvalGranted: true, trustedContextPresent: true }, true))
+    expect(preflightToolInvocation(protectedManifest, { grantedScopes: ["calendar.read"], approvalGranted: true, trustedContextPresent: true }))
       .toEqual({ allowed: true });
   });
 
   it("never permits an invalid manifest", () => {
-    expect(preflightToolInvocation(manifest, { grantedScopes: ["calendar.read"], approvalGranted: true, trustedContextPresent: true }, false))
+    const invalid = { ...manifest, timeoutMs: -1 } as ToolManifestV1;
+    expect(preflightToolInvocation(invalid, { grantedScopes: ["calendar.read"], approvalGranted: true, trustedContextPresent: true }))
       .toEqual({ allowed: false, reason: "manifest_invalid" });
   });
 });
