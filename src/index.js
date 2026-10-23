@@ -69,17 +69,21 @@ export function createToolRegistry({ authorize, verifyApproval, timeoutMs = 15_0
         if (!approved) throw new ToolExecutionError("approval_required", "A valid approval is required");
       }
 
+      if (signal?.aborted) throw new ToolExecutionError("aborted", "Tool execution was cancelled");
       const controller = new AbortController();
       const onAbort = () => controller.abort(signal?.reason);
-      if (signal?.aborted) onAbort();
-      else signal?.addEventListener("abort", onAbort, { once: true });
+      signal?.addEventListener("abort", onAbort, { once: true });
       const requestId = randomUUID();
       let timeout;
+      let timedOut = false;
       try {
         const timeoutPromise = new Promise((_, reject) => {
+          controller.signal.addEventListener("abort", () => {
+            reject(new ToolExecutionError(timedOut ? "timeout" : "aborted", timedOut ? "Tool execution timed out" : "Tool execution was cancelled"));
+          }, { once: true });
           timeout = setTimeout(() => {
+            timedOut = true;
             controller.abort();
-            reject(new ToolExecutionError("timeout", "Tool execution timed out"));
           }, timeoutMs);
         });
         const operation = Promise.resolve().then(() => tool.execute(input, { principal, signal: controller.signal, requestId }));
