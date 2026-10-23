@@ -54,3 +54,17 @@ test("does not expose raw tool errors", async () => {
   registry.register({ ...definition, id: "broken", execute: async () => { throw new Error("secret data"); } });
   await assert.rejects(registry.execute({ principal, toolId: "broken", input: { noteId: "n" } }), (e) => e.code === "execution_failed" && !e.message.includes("secret"));
 });
+
+
+test("rejects pre-aborted signals and promptly stops waiting on caller cancellation", async () => {
+  const { registry } = setup();
+  registry.register({ ...definition, id: "never", execute: () => new Promise(() => {}) });
+  const already = new AbortController();
+  already.abort();
+  await assert.rejects(registry.execute({ principal, toolId: "never", input: { noteId: "n" }, signal: already.signal }), (e) => e.code === "aborted");
+
+  const controller = new AbortController();
+  const pending = registry.execute({ principal, toolId: "never", input: { noteId: "n" }, signal: controller.signal });
+  controller.abort();
+  await assert.rejects(pending, (e) => e.code === "aborted");
+});
