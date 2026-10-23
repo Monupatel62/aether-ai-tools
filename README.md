@@ -1,6 +1,6 @@
 # aether-ai-tools
 
-> **Status: Documentation phase.** No application code or production deployment has been started in this repository.
+> **Status: Initial tool-manifest validator and fail-closed preflight are in review.** No tool executor, sandbox, network boundary, or production deployment is implemented.
 
 ## Purpose
 
@@ -19,6 +19,10 @@ aether-ai-security and aether-ai-observability; MCP-backed tools register throug
 - No implementation starts until the documentation and cross-repository contracts are reviewed.
 - Do not commit secrets, API keys, user data, or production credentials.
 - Public interfaces, security decisions, and non-obvious implementation choices must be documented.
+
+## Initial implementation
+
+The draft package validates tool manifest metadata, scope declarations, time/output limits, approval requirements for high/critical risk, and idempotency declarations for side-effecting tools. Its preflight checks manifest validity, trusted-context presence, granted scopes, and approval status. It is not an authorization engine: callers must establish trusted identity and enforce resource-level policy. No tool execution or sandbox is implemented.
 
 ## Documentation
 
