@@ -8,11 +8,15 @@ Tool manifest, invocation envelope, scopes, risk classification and audit event
 
 ## Direct dependencies
 
-aether-ai-security, aether-ai-observability, and the public aether-ai-mcp adapter contract where needed.
+aether-ai-security and aether-ai-observability. The Tools contract is protocol-neutral and must not depend on or import the aether-ai-mcp adapter.
+
+## MCP composition boundary
+
+aether-ai-mcp consumes the public tool manifest/invocation contract defined here. A composition root registers MCP-backed tools into the Tools registry after allowlist and policy checks. Tools owns execution authorization and isolation policy; MCP owns protocol transport and adaptation. This direction prevents a Tools ↔ MCP package cycle.
 
 ## Required rules
 
-Every tool declares input/output schema, permissions, side effects, timeout, max output, approval requirement, audit metadata, and whether retries are safe.
+Every tool declares input/output schema, permissions, side effects, timeout, max output, approval requirement, audit metadata, and whether retries are safe. Remote tool definitions and results are untrusted and cannot grant permissions.
 
 ## Contract governance
 
